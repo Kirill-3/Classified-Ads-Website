@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+            <title><form action="" method="post"></form></title>
+         <link rel="stylesheet" a href="Styelsheet.css"></a>
+    
+    </head>
+    <body>
+            <form name="myForm" method="post" onSubmit ="return validateForm(), sendForm()">
+            <label for="fname">Full name:</label><br>
+            <input type="text" id="fname" name="fname"><br>
+
+            <label for="email">Email:</label><br>
+            <input type="text" id="email" name="email"><br>
+            
+            <label for="descrip">Write a description of your product:</label><br>
+            <input type="text" id="descrip" name="descrip"><br><br>
+
+           <!-- <label for="description">Write a description of your product:</label><br>
+            <input type="text" id="descrip"><br>-->
+
+            <label for="image">Upload your advert:</label><br>
+            <input type="file" id="myFile" name="filename"><br>
+
+            <label for="category">Category:</label><br>
+            <select name="category" id="category">
+                <option value="electronics">Electronics</option>
+                <option value="clothing">Clothing</option>
+                <option value="books">Books</option>
+                <option value="Health and Beauty">Health and Beauty</option>
+                <option value="Business supplies">Business supplies</option>
+            </select><br>
+
+            <input type="submit" value="Submit" id="submit">
+            <a href="Moderator Screen.html" style="position:absolute;top:150px;left:20px;"></a>
+
+          </form>
+          <script>
+                function validateForm(){
+                var fname = document.forms["myForm"]["fname"].value;
+                var lname = document["myForm"]["lname"].value;
+                var email = document["myForm"]["email"].value;
+               
+                if (fname=="") {
+                    alert("First name must be filled out");
+                        return false;
+                }
+                if (lname=="") {
+                    alert("Last name must be filled out");
+                        return false;
+                }
+                if (email=="") {
+                    alert("email must be filled out");
+                        return false;}
+                }
+
+
+                $ = function(id) {
+                    return document.getElementById(id);
+
+                }
+                var show = function(id) {
+                    $(id).style.display  = 'block';
+    
+                }
+
+                var hide = function(id) {
+                    $(id).style.display = 'none';
+                }
+
+                function sendForm() {
+                    //extract data from form and save as variable
+                    var firstName = document.forms['myForm']['fname'].value;
+                    var lastName = document.forms['myForm']['lname'].value;
+                    var email = document.forms['myForm'][email].value;
+                    var descrip = document.forms['myForm'][descrip].value;
+                    var file = document.forms['myForm'][myFile].value;
+                    var catergory = document.forms['myForm'][category].value;
+                    
+                    // parameter string
+                    variableStrings = 'fname='+name+'&lname='+lname+'&email='+email+'&descrip'+descrip+'&file='+file+'&category='+category;
+                    //create new XML    http OBJECT
+                    var xhttp = new XMLHttpRequest();
+                    xhttp.open("POST","form2", true);
+                    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    xhttp.onreadystatechange == function sendForm(){
+                        if (xhttp.readyState === 4 && xhttp.status === 200){
+                            var text = xhttp.responseText;
+                            // console.log(text);
+                            // var directory = JSON.parse(text);
+                            // console.log(directory);
+
+                            console.log(xhttp.responseText);
+                            document.getElementById('myForm').innerHTML = xhttp.responseText;
+                        } else {
+                            console.error(xhttp.statusText)
+                        };
+                        xhttp.send(variableStrings);
+                        return false;
+                    }
+                }
+                function submit() {
+                    document.getElementById('submit').addEventListener('click',sendForm)
+                }
+                sendForm()
+                }
+          </script>
+    </body>
+</html>
