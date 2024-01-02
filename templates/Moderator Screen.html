@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div class="container">
+          <!--  <p>Name: {{ info }}</p> -->
+            <textarea id="textbox" class="adbox" placeholder="submitted ads appear here" rows="30" aria-setsize="50"></textarea>
+        </div>
+
+        <div>
+             Name: 
+        </div>
+
+        <form name="validateForm" id="Form" onclick="return validateAdvert()">
+            <button id="approve" type="button" onclick="return validateAdvert()" style="position:absolute;right:100px;top:500px;background-color: rgb(18, 178, 18); color: ivory;height: 40px; width: 100px;" >Approve</button>
+            <button id="reject" type="button" onclick="return validateAdvert()" style="position:absolute;right:200px;top:500px;background-color: red;color: ghostwhite;height: 40px; width: 100px;">Reject</button>
+            <textarea id="freeform" name="freeform" rows="25" cols="40" style="position: absolute;right:50px;top:50px;"input placeholder="Add feedback..."></textarea>
+        </form>
+
+        <!-- <button type="button" onclick="alert('Approved!')" style="position:absolute;right:100px;top:500px;background-color: rgb(18, 178, 18); color: ivory;height: 40px; width: 100px;" >Approve</button>
+        <button type="button" class="button1" onclick="alert('Rejected!')" style="position:absolute;right:200px;top:500px;background-color: red;color: ghostwhite;height: 40px; width: 100px;">Reject</button>
+        <textarea id="freeform" name="freeform" rows="25" cols="40" style="position: absolute;right:50px;top:50px;"input placeholder="Add feedback..."></textarea> -->
+        <!--use ajax-->
+        <button type="button" class="button2" onclick="alert('Getting New Application')" style="position:absolute;right:350px;top:500px;background-color: deepskyblue;color: ghostwhite;height: 40px;width: 100px;">New Application</button>
+        <script>
+            function validateAdvert(){
+                var ads = document.getElementById("ads");
+                var approve = document.forms["approve"];
+                var reject = document.forms["reject"];
+                param = 'approve='+approve+'&reject='+reject;
+
+                var xhttp = new XMLHttpRequest();
+                    xhttp.open("POST","Moderator Screen", true);
+                    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    xhttp.onreadystatechange == function validateAdvert(){
+                        if (xhttp.readyState === 4 && xhttp.status === 200){
+                            var text = xhttp.responseText;
+                            // console.log(text);
+                            // var directory = JSON.parse(text);
+                            // console.log(directory);
+
+                            console.log(xhttp.responseText);
+                            document.getElementById('SForm').innerHTML = xhttp.responseText;
+                        } else {
+                            console.error(xhttp.statusText)
+                        };
+                        xhttp.send(param);
+                        return false;
+                    }
+                
+                if (document.addEventListener.onclick == "Approve"){
+                    document.alert("Successful");
+                        
+                
+                elif (document.addEventListener.onclick == "Reject");{
+                    document.alert("Your advery has been rejected");
+                }
+                
+            }
+            validateAdvert()
+
+        }
+
+            
+        </script>
+        <style>
+            button {
+                background-color: rgb(12, 231, 12);
+                border-radius: 8px;
+                transition-duration:0.4s;
+            }
+            button:hover {
+                background-color: rgb(8, 147, 8);
+                color: ghostwhite;
+            }
+            .button1 {
+                background-color: red;
+                border-radius: 8px;
+                transition-duration: 0.4s;
+            }
+            .button1:hover {
+                background-color: rgb(188, 8, 8);
+                color: ghostwhite;
+            }
+            .button2 {
+                background-color: aqua;
+                border-radius: 8px;
+                transition-duration: 0.4s;
+            }
+            .button2:hover {
+                background-color: blue;
+                color: ghostwhite;
+            }
+        
+        </style>
+    </body>
+</html>
